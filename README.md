@@ -1,1 +1,1 @@
-# mockmock-amazon-api-gateway-sample-
+# mockmock-amazon-api-gateway-sample
