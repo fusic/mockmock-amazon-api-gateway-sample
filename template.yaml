@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  api-gateway-sample
+
+  Amazon API Gateway sample for mockmock
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  AuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app/app.auth
+      Runtime: python3.6
+      Events:
+        Auth:
+          Type: Api
+          Properties:
+            Path: /auth/{auth_key}
+            Method: get
+            RequestParameters:
+              - method.request.path.auth_key:
+                  Required: true
+                  Caching: false
+
+Outputs:
+  AuthApi:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/auth/<auth_key>"
